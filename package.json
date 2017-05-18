@@ -1,0 +1,25 @@
+{
+  "name": "us-street-abbreviations",
+  "version": "1.0.1",
+  "description": "Substitutes full words in U.S. street addresses with their postal short code abbreviations.",
+  "main": "index.js",
+  "preferGlobal": "true",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "street",
+    "address",
+    "postal",
+    "abbreviation"
+  ],
+  "author": "@iDoMeteor for BoldLeads.com",
+  "bugs": { "url" : "https://github.com/boldleadsdevelopment/node-module-us-street-abbreviations/issues"
+    , "email" : "idometeor@gmail.com"
+  },
+  "repository" :
+  { "type" : "git"
+    , "url" : "https://github.com/boldleadsdevelopment/node-module-us-street-abbreviations.git"
+  },
+  "license": "ISC"
+}

@@ -3,10 +3,10 @@ var debug = false;
 
 /**
  *
- * @Description Take a street address and return an array of variants or false
+ * @Description Take a street address and return a unique set of variants or false
  * @Function    getVariants
- * @Param       value 				 A string, which should be a street address
- * @Returns     {array|null}   A modified string, or null if no replacement
+ * @Param       value 				A string, which should be a street address
+ * @Returns     {set}         An actual Javascript set
  *
  */
 exports.getVariants = function (value) {
@@ -21,7 +21,7 @@ exports.getVariants = function (value) {
   if (debug) console.log(`Variant array: ${arr}`);
 
   // Return
-  return arr;
+  return new Set (arr);
 
 }
 
@@ -35,30 +35,36 @@ exports.getVariants = function (value) {
  */
 function exchange (value) {
 
+  if (!value || !value.length) return [];
+  value = value.toLowerCase();
+
   const retVal = [];
-  const variants = [];
+  let variants = [];
   const words = value.split(' ');
   if (debug) console.log(`Words: ${JSON.stringify(words, null, 2)}`);
 
-  if (words && words.length) {
-    words.forEach((word, index) => {
-      const k = matches.indexOf(word.toLowerCase());
-      let exp;
-      if (debug) console.log(`Words[${k}]: ${word}`);
-      if (-1 != k) {
-        if (debug) console.log(`Matches[${k}]: ${matches[k]}`);
-        if (debug) console.log(`Replacement[${k}]: ${replacements[k]}`);
-        if (words.length == k + 1) {
-          exp = new RegExp(`${word}$`, 'i');
-        } else {
-          exp = new RegExp(`${word}`, 'i');
-        }
-        v = value.replace(exp, replacements[k]);
+  words.forEach((word, index) => {
+    const k = matches.indexOf(word);
+    let exp;
+    if (debug) console.log(`Words[${k}]: ${word}`);
+    if (-1 != k) {
+      if (debug) console.log(`Matches[${k}]: ${matches[k]}`);
+      if (debug) console.log(`Replacement[${k}]: ${replacements[k]}`);
+      if (words.length == k + 1) {
+        exp = new RegExp(`${word}$`, 'i');
+      } else {
+        exp = new RegExp(`${word}`, 'i');
+      }
+      v = value.replace(exp, replacements[k]);
+      if (v != value) {
         variants.push(v);
         if (debug) console.log(`Pushing: ${v}`);
+        if (debug) console.log(`Recursing on: ${v}`);
+        variants = variants.concat(exchange(v));
       }
-    });
-  }
+    }
+  });
+
 
   // Strip empties
   variants.forEach(value => value && retVal.push(value));

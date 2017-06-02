@@ -1,20 +1,22 @@
 # US Street Abbreviations
 ## Turns a US street address into a unique set of strings with various standard US postal street keywords abbreviated.
 
-Installation:
+## Installation:
 
 ```bash
 npm install --save us-street-abbrevations
 ```
 
-Usage:
+## Usage:
 
 ```javascript
 const X = import * from 'us-street-abbreviations';
 X.getVariants('123 North Northeast Street');
 ```
 
-Expected result:
+Set DEBUG environment variable to true to enable debugging messages.
+
+## Expected result:
 
 ```javascript
 {

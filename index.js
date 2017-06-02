@@ -1,5 +1,5 @@
-// True enables logging messages
-var debug = false;
+// Set DEBUG environment variable to true to enable logging messages
+const debug = ('string' == typeof process.env.DEBUG) ? process.env.DEBUG : false;
 
 /**
  *
@@ -57,8 +57,8 @@ function exchange (value) {
       }
       v = value.replace(exp, replacements[k]);
       if (v != value) {
-        variants.push(v);
         if (debug) console.log(`Pushing: ${v}`);
+        variants.push(v);
         if (debug) console.log(`Recursing on: ${v}`);
         variants = variants.concat(exchange(v));
       }

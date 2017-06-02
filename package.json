@@ -1,6 +1,6 @@
 {
   "name": "us-street-abbreviations",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Substitutes full words in U.S. street addresses with their postal short code abbreviations.",
   "main": "index.js",
   "preferGlobal": "true",

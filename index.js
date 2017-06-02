@@ -1,5 +1,8 @@
 // Set DEBUG environment variable to true to enable logging messages
-const debug = ('string' == typeof process.env.DEBUG) ? process.env.DEBUG : false;
+const debug = (
+  ('string' == typeof process.env.DEBUG)
+    && ('true' == process.env.DEBUG)
+) ? true : false;
 
 /**
  *
